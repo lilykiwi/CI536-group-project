@@ -6,9 +6,22 @@ using UnityEngine.SceneManagement;
 
 public class NewLevel : MonoBehaviour
 {
-    void OnTriggerEnter(Collider other)
+
+    private GameObject sceneCamera;
+    private GameController gameController;
+
+    void Start() {
+        // get scene camera
+        Camera sceneCamera = Camera.main;
+        // get scenecontroller from scene camera
+        gameController = sceneCamera.GetComponent<GameController>();
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
     {
-        SceneManager.LoadScene(1);
-        Debug.Log("this worked");
+        // we have collected a water, so call the function on the game controller
+        gameController.collectWater();
+        // delete the particle
+        Destroy(other.gameObject);
     }
 }

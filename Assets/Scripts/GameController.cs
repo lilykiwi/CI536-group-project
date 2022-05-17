@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     private GameObject[] blocks;
+    private GameObject[] muds;
     public GameObject blockPrefab;
     private GameObject clickIndicator;
     public GameObject clickIndicatorPrefab;
@@ -15,8 +16,16 @@ public class GameController : MonoBehaviour
     // integer to keep track of water needed to collect
     public int waterNeeded = 50;
     public int waterCollected = 0;
+
     // get slider for water needed
     private Slider waterNeededSlider;
+
+    // integer to keep track of lives
+    public int maxiumumLives = 10;
+    public int hitsTaken = 0;
+
+    // get slider for maximum lives
+    private Slider maximumLivesSlider;
 
     // method for converting mouse position to grid position
     Vector3 posToGrid(Vector3 Position)
@@ -41,7 +50,7 @@ public class GameController : MonoBehaviour
         if (hit.collider != null)
         {
             // check if the block is in the set of blocks
-            if (System.Array.IndexOf(blocks, hit.collider.gameObject) != -1)
+            if ((System.Array.IndexOf(blocks, hit.collider.gameObject) != -1) || (System.Array.IndexOf(muds, hit.collider.gameObject) != -1))
             {
                 // set the sprite to can dig
                 clickIndicator.GetComponent<SpriteRenderer>().sprite =
@@ -67,7 +76,15 @@ public class GameController : MonoBehaviour
         waterCollected += 1;
 
         // update the slider value using the water collected and the water needed value
-        waterNeededSlider.value = ( waterNeeded - waterCollected * 1f ) / waterNeeded * 1f;
+        waterNeededSlider.value = (waterNeeded - waterCollected * 1f) / waterNeeded * 1f;
+    }
+
+    public void minusLives()
+    {
+        hitsTaken += 1;
+
+        // update the slider value using the water collected and the water needed value
+        maximumLivesSlider.value = (maxiumumLives - hitsTaken * 1f) / maxiumumLives * 1f;
     }
 
     // Start is called before the first frame update
@@ -82,8 +99,14 @@ public class GameController : MonoBehaviour
         // get every block in the scene
         blocks = GameObject.FindGameObjectsWithTag("Block");
 
-        // get the slider in the ui canvas
+        // get every mud in the scene
+        muds = GameObject.FindGameObjectsWithTag("Mud");
+
+        // get the water slider in the ui canvas
         waterNeededSlider = GameObject.FindGameObjectWithTag("WaterSlider").GetComponent<Slider>();
+
+        // get the lives slider in the ui canvas
+        maximumLivesSlider = GameObject.FindGameObjectWithTag("LivesSlider").GetComponent<Slider>();
     }
 
     // Update is called once per frame
@@ -91,4 +114,5 @@ public class GameController : MonoBehaviour
     {
         PositionClickIndicator();
     }
+
 }

@@ -9,6 +9,7 @@ public class NewLevel : MonoBehaviour
 
     private GameObject sceneCamera;
     private GameController gameController;
+    private string otherTag;
 
     void Start() {
         // get scene camera
@@ -17,11 +18,18 @@ public class NewLevel : MonoBehaviour
         gameController = sceneCamera.GetComponent<GameController>();
     }
 
+    //Checking bucket collisions
     void OnTriggerEnter2D(Collider2D other)
     {
-        // we have collected a water, so call the function on the game controller
-        gameController.collectWater();
-        // delete the particle
-        Destroy(other.gameObject);
+        if (other.gameObject.CompareTag("MuddyWater")){
+            gameController.minusLives();
+            Destroy(other.gameObject);
+        }
+        else{
+            // we have collected a water, so call the function on the game controller
+            gameController.collectWater();
+            // delete the particle
+            Destroy(other.gameObject);
+        }
     }
 }

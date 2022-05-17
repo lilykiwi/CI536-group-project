@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Fluid
-  m_Shader: {fileID: -6465566751694194690, guid: 6e5fdb929c3b0ca438f9f7c22b538c02,
+  m_Name: MuddyWater
+  m_Shader: {fileID: -6465566751694194690, guid: 84db46af83466944b88e1db525db2e49,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -58,6 +58,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 8400000, guid: adf8a041830130f4ea908c51414cbb2d, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex2:
+        m_Texture: {fileID: 8400000, guid: 5f3548b6642d7554d93e06dea34eb848, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -137,7 +141,7 @@ Material:
     m_Colors:
     - _BASE_COLOR: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0, g: 0.65331316, b: 1, a: 1}
+    - _Color: {r: 0.3018868, g: 0.2029954, b: 0.1495194, a: 1}
     - _EMISSION_COLOR: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SPECULAR_COLOR: {r: 1, g: 1, b: 1, a: 0}

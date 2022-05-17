@@ -29,7 +29,7 @@ public class BlockScript : MonoBehaviour
                 spriteRenderer.sprite = mudSprite;
                 this.gameObject.tag = "MudActive";
                 objectTransform = this.gameObject.transform;
-                objectTransform.position += new Vector3(0,0,-1);
+                objectTransform.position += new Vector3(0,0,5);
                 objectCollider = this.gameObject.GetComponent<Collider2D>();
                 objectCollider.isTrigger = true;
             }

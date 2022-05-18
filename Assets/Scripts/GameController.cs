@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
     public GameObject clickIndicatorPrefab;
     public Sprite canDigSprite;
     public Sprite cantDigSprite;
+    private Scene scene;
 
     // integer to keep track of water needed to collect
     public int waterNeeded = 50;
@@ -83,7 +84,13 @@ public class GameController : MonoBehaviour
         waterNeededSlider.value = (waterNeeded - waterCollected * 1f) / waterNeeded * 1f;
         if (waterCollected >= waterNeeded)
         {
-            SceneManager.LoadScene(1);
+            scene = SceneManager.GetActiveScene();
+            if(scene.name == "Level 1"){
+                SceneManager.LoadScene("Level 2");
+            }
+            else if (scene.name == "Level 2"){
+                SceneManager.LoadScene("Level 3");
+            }
         }
     }
 

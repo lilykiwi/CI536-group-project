@@ -50,6 +50,9 @@ public class GameController : MonoBehaviour
         // check hit for a block
         if (hit.collider != null)
         {
+            // get every mud in the scene
+            muds = GameObject.FindGameObjectsWithTag("Mud");
+
             // check if the block is in the set of blocks
             if ((System.Array.IndexOf(blocks, hit.collider.gameObject) != -1) || (System.Array.IndexOf(muds, hit.collider.gameObject) != -1))
             {
@@ -104,8 +107,6 @@ public class GameController : MonoBehaviour
         // get every block in the scene
         blocks = GameObject.FindGameObjectsWithTag("Block");
 
-        // get every mud in the scene
-        muds = GameObject.FindGameObjectsWithTag("Mud");
 
         // get the water slider in the ui canvas
         waterNeededSlider = GameObject.FindGameObjectWithTag("WaterSlider").GetComponent<Slider>();

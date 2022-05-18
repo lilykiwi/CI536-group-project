@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
     public GameObject clickIndicatorPrefab;
     public Sprite canDigSprite;
     public Sprite cantDigSprite;
+    private Scene scene;
 
     // integer to keep track of water needed to collect
     public int waterNeeded = 50;
@@ -50,6 +51,9 @@ public class GameController : MonoBehaviour
         // check hit for a block
         if (hit.collider != null)
         {
+            // get every mud in the scene
+            muds = GameObject.FindGameObjectsWithTag("Mud");
+
             // check if the block is in the set of blocks
             if ((System.Array.IndexOf(blocks, hit.collider.gameObject) != -1) || (System.Array.IndexOf(muds, hit.collider.gameObject) != -1))
             {
@@ -80,7 +84,13 @@ public class GameController : MonoBehaviour
         waterNeededSlider.value = (waterNeeded - waterCollected * 1f) / waterNeeded * 1f;
         if (waterCollected >= waterNeeded)
         {
-            SceneManager.LoadScene(1);
+            scene = SceneManager.GetActiveScene();
+            if(scene.name == "Level 1"){
+                SceneManager.LoadScene("Level 2");
+            }
+            else if (scene.name == "Level 2"){
+                SceneManager.LoadScene("Level 3");
+            }
         }
     }
 
@@ -104,8 +114,6 @@ public class GameController : MonoBehaviour
         // get every block in the scene
         blocks = GameObject.FindGameObjectsWithTag("Block");
 
-        // get every mud in the scene
-        muds = GameObject.FindGameObjectsWithTag("Mud");
 
         // get the water slider in the ui canvas
         waterNeededSlider = GameObject.FindGameObjectWithTag("WaterSlider").GetComponent<Slider>();

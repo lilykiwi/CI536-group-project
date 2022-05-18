@@ -12,6 +12,7 @@ TagManager:
   - LivesSlider
   - Water
   - Filter
+  - BackgroundMusic
   layers:
   - Default
   - TransparentFX

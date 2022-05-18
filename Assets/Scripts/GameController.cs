@@ -91,6 +91,34 @@ public class GameController : MonoBehaviour
             else if (scene.name == "Level 2"){
                 SceneManager.LoadScene("Level 3");
             }
+            else if (scene.name == "Level 3")
+            {
+                SceneManager.LoadScene("Level 4");
+            }
+            else if (scene.name == "Level 4")
+            {
+                SceneManager.LoadScene("Level 5");
+            }
+            else if (scene.name == "Level 5")
+            {
+                SceneManager.LoadScene("Level 6");
+            }
+            else if (scene.name == "Level 6")
+            {
+                SceneManager.LoadScene("Level 7");
+            }
+            else if (scene.name == "Level 7")
+            {
+                SceneManager.LoadScene("Level 8");
+            }
+            else if (scene.name == "Level 8")
+            {
+                SceneManager.LoadScene("Level 9");
+            }
+            else if (scene.name == "Level 9")
+            {
+                SceneManager.LoadScene("Level 10");
+            }
         }
     }
 

@@ -3,9 +3,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SceneLoader : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    public static SceneLoader instance;
+    public static GameManager instance;
 
     private void Awake()
     {

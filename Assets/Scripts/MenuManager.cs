@@ -20,8 +20,6 @@ public class MenuManager : MonoBehaviour
         // hide levelSelect
         levelSelect.SetActive(false);
 
-        // get scene loader from main camera
-        SceneLoader sceneLoader = Camera.main.GetComponent<SceneLoader>();
     }
 
     public void showLevelSelect()

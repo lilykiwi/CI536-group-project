@@ -214,7 +214,7 @@ GameObject:
   - component: {fileID: 15481306}
   - component: {fileID: 15481305}
   m_Layer: 5
-  m_Name: PlayButton
+  m_Name: LevelSelectPlay (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -429,12 +429,12 @@ RectTransform:
   m_Children:
   - {fileID: 15481304}
   - {fileID: 522889774}
-  - {fileID: 1952195252}
   - {fileID: 177835086}
-  - {fileID: 1024572535}
+  - {fileID: 1952195252}
   - {fileID: 1810888999}
-  - {fileID: 1859626720}
+  - {fileID: 1024572535}
   - {fileID: 307823186}
+  - {fileID: 1859626720}
   - {fileID: 1453526845}
   - {fileID: 583937442}
   m_Father: {fileID: 1078837383}
@@ -730,7 +730,7 @@ GameObject:
   - component: {fileID: 177835088}
   - component: {fileID: 177835087}
   m_Layer: 5
-  m_Name: PlayButton (1)
+  m_Name: LevelSelectPlay (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -749,7 +749,7 @@ RectTransform:
   m_Children:
   - {fileID: 167697617}
   m_Father: {fileID: 121532645}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -863,7 +863,7 @@ GameObject:
   - component: {fileID: 307823188}
   - component: {fileID: 307823187}
   m_Layer: 5
-  m_Name: PlayButton (7)
+  m_Name: LevelSelectPlay (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -882,7 +882,7 @@ RectTransform:
   m_Children:
   - {fileID: 2104037902}
   m_Father: {fileID: 121532645}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -22127,7 +22127,7 @@ GameObject:
   - component: {fileID: 522889776}
   - component: {fileID: 522889775}
   m_Layer: 5
-  m_Name: PlayButton (2)
+  m_Name: LevelSelectPlay (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22260,7 +22260,7 @@ GameObject:
   - component: {fileID: 583937444}
   - component: {fileID: 583937443}
   m_Layer: 5
-  m_Name: PlayButton (10)
+  m_Name: LevelSelectPlay (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22943,7 +22943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 121532645}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
@@ -23148,7 +23148,7 @@ GameObject:
   - component: {fileID: 1024572537}
   - component: {fileID: 1024572536}
   m_Layer: 5
-  m_Name: PlayButton (4)
+  m_Name: LevelSelectPlay (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23167,7 +23167,7 @@ RectTransform:
   m_Children:
   - {fileID: 2065807445}
   m_Father: {fileID: 121532645}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -24071,7 +24071,7 @@ GameObject:
   - component: {fileID: 1453526847}
   - component: {fileID: 1453526846}
   m_Layer: 5
-  m_Name: PlayButton (9)
+  m_Name: LevelSelectPlay (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24322,8 +24322,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dc06483bd7045e48a901aa57653b241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenu: {fileID: 0}
-  levelSelect: {fileID: 0}
 --- !u!114 &1481864845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24349,7 +24347,7 @@ GameObject:
   - component: {fileID: 1600534459}
   - component: {fileID: 1600534458}
   m_Layer: 5
-  m_Name: PlayButton (11)
+  m_Name: LevelSelectPlay ( )
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24482,7 +24480,7 @@ GameObject:
   - component: {fileID: 1652089048}
   - component: {fileID: 1652089047}
   m_Layer: 5
-  m_Name: PlayButton (1)
+  m_Name: LevelSelectButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24755,7 +24753,7 @@ GameObject:
   - component: {fileID: 1810889001}
   - component: {fileID: 1810889000}
   m_Layer: 5
-  m_Name: PlayButton (5)
+  m_Name: LevelSelectPlay (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24774,7 +24772,7 @@ RectTransform:
   m_Children:
   - {fileID: 1058016708}
   m_Father: {fileID: 121532645}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -24888,7 +24886,7 @@ GameObject:
   - component: {fileID: 1859626722}
   - component: {fileID: 1859626721}
   m_Layer: 5
-  m_Name: PlayButton (6)
+  m_Name: LevelSelectPlay (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24907,7 +24905,7 @@ RectTransform:
   m_Children:
   - {fileID: 1958927832}
   m_Father: {fileID: 121532645}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -25366,7 +25364,7 @@ GameObject:
   - component: {fileID: 1952195254}
   - component: {fileID: 1952195253}
   m_Layer: 5
-  m_Name: PlayButton (3)
+  m_Name: LevelSelectPlay (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25385,7 +25383,7 @@ RectTransform:
   m_Children:
   - {fileID: 1408287810}
   m_Father: {fileID: 121532645}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}

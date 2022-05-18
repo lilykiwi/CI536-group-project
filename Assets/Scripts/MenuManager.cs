@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
 
-    public GameObject mainMenu;
-    public GameObject levelSelect;
+    private GameObject mainMenu;
+    private GameObject levelSelect;
 
     // Start is called before the first frame update
     void Start()

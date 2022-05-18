@@ -46,5 +46,13 @@ public class BlockScript : MonoBehaviour
                 other.gameObject.layer = 9;
             }
         }
+        if (this.gameObject.CompareTag("Filter"))
+        {
+            if (other.gameObject.CompareTag("MuddyWater"))
+            {
+                other.gameObject.tag = "Water";
+                other.gameObject.layer = 8;
+            }
+        }
     }
 }

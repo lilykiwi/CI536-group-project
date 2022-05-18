@@ -128,6 +128,11 @@ public class GameController : MonoBehaviour
 
         // update the slider value using the water collected and the water needed value
         maximumLivesSlider.value = (maxiumumLives - hitsTaken * 1f) / maxiumumLives * 1f;
+
+        if (hitsTaken > maxiumumLives){
+            scene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(scene.name);
+        }
     }
 
     // Start is called before the first frame update

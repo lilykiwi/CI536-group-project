@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
@@ -77,6 +78,10 @@ public class GameController : MonoBehaviour
 
         // update the slider value using the water collected and the water needed value
         waterNeededSlider.value = (waterNeeded - waterCollected * 1f) / waterNeeded * 1f;
+        if (waterCollected >= waterNeeded)
+        {
+            SceneManager.LoadScene(1);
+        }
     }
 
     public void minusLives()

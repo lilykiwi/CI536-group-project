@@ -5,18 +5,41 @@ using UnityEngine.UI;
 
 public class SceneLoader : MonoBehaviour
 {
-    public static SceneLoader instance;
+    private SceneLoader instance;
 
-    private void Awake()
+    private int sceneNumber = 0;
+
+    private bool menuLoaded = false;
+
+    public void Awake()
     {
         instance = this;
 
-        SceneManager.LoadSceneAsync((int)SceneIndexes.Menu, LoadSceneMode.Additive);
+        // async load menu
+
+        SceneManager.LoadSceneAsync("Menu", LoadSceneMode.Additive);
+        menuLoaded = true;
     }
 
-    public void LoadGame()
+    public void UnloadMenu()
     {
-        SceneManager.UnloadSceneAsync((int)SceneIndexes.Menu);
-        SceneManager.LoadSceneAsync((int)SceneIndexes.Level_1, LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync("Menu");
+    }
+
+    public void NextLevel()
+    {
+        if (menuLoaded)
+        {
+            UnloadMenu();
+            menuLoaded = false;
+        }
+
+        // unload current level
+        SceneManager.UnloadSceneAsync("Level " + sceneNumber);
+
+        // load next level
+        SceneManager
+            .LoadSceneAsync("Level " + sceneNumber, LoadSceneMode.Additive);
+        sceneNumber++;
     }
 }

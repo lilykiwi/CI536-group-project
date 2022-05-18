@@ -3,31 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
-public class NewLevel : MonoBehaviour
+public class Bucket : MonoBehaviour
 {
-
     private GameObject sceneCamera;
+
     private GameController gameController;
+
+    private AudioSource bucketAudio;
+
     private string otherTag;
 
-    void Start() {
+    void Start()
+    {
         // get scene camera
         Camera sceneCamera = Camera.main;
+
         // get scenecontroller from scene camera
         gameController = sceneCamera.GetComponent<GameController>();
+
+        // get audio source
+        bucketAudio = this.GetComponent<AudioSource>();
     }
 
     //Checking bucket collisions
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("MuddyWater")){
-            gameController.minusLives();
+        bucketAudio.Play();
+
+        if (other.gameObject.CompareTag("MuddyWater"))
+        {
+            // we collected muddy water, so subtract a life
+            gameController.collectWater("Muddy");
             Destroy(other.gameObject);
         }
-        else{
+        else
+        {
             // we have collected a water, so call the function on the game controller
-            gameController.collectWater();
+            gameController.collectWater("Clean");
+
             // delete the particle
             Destroy(other.gameObject);
         }

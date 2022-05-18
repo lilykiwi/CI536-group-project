@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-
     private GameObject mainMenu;
+
     private GameObject levelSelect;
 
     // Start is called before the first frame update
@@ -14,18 +14,19 @@ public class MenuManager : MonoBehaviour
     {
         // fetch mainMenu object
         mainMenu = GameObject.Find("MainMenu");
+
         // fetch levelSelect object
         levelSelect = GameObject.Find("LevelSelect");
 
         // hide levelSelect
         levelSelect.SetActive(false);
-
     }
 
     public void showLevelSelect()
     {
         // show levelSelect
         levelSelect.SetActive(true);
+
         // hide mainMenu
         mainMenu.SetActive(false);
     }
@@ -34,6 +35,7 @@ public class MenuManager : MonoBehaviour
     {
         // show mainMenu
         mainMenu.SetActive(true);
+
         // hide levelSelect
         levelSelect.SetActive(false);
     }

@@ -5,43 +5,63 @@ using UnityEngine;
 public class BlockScript : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
+
     public Sprite mudSprite;
+
+    public Sprite brokenSprite;
+
     private Collider2D objectCollider;
-    private Transform objectTransform;
+
+    private CameraController cameraController;
+
+    private AudioSource blockAudio;
+
+    private GameController gameController;
 
     // Start is called before the first frame update
-    void Start(){
+    void Start()
+    {
         spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
-
-    }
-
-    // Update is called once per frame
-    void Update(){
-        
+        blockAudio = this.gameObject.GetComponent<AudioSource>();
+        cameraController = Camera.main.GetComponent<CameraController>();
+        gameController = Camera.main.GetComponent<GameController>();
     }
 
     void OnMouseOver() //Checks if mouse is over the object
     {
-        //Checks if mouse button 1 is pressed
-        if (Input.GetMouseButtonDown(0)){ 
+        //Checks if mouse button 1 is (un)pressed
+        if (
+            Input.GetMouseButtonUp(0) &&
+            cameraController.isMoving == false &&
+            gameController.isPaused() == false
+        )
+        {
+            blockAudio.Play();
+
             //Code could be put here to spawn another object for mud or whatever
-            if (this.gameObject.CompareTag("Mud")){
+            if (this.gameObject.CompareTag("Mud"))
+            {
                 spriteRenderer.sprite = mudSprite;
                 this.gameObject.tag = "MudActive";
-                objectTransform = this.gameObject.transform;
-                objectTransform.position += new Vector3(0,0,5);
-                objectCollider = this.gameObject.GetComponent<Collider2D>();
-                objectCollider.isTrigger = true;
+                transform.Translate(0, 0, 5);
+                this.gameObject.GetComponent<Collider2D>().isTrigger = true;
             }
-            else if(!this.gameObject.CompareTag("MudActive")){
-                Destroy(this.gameObject); //Destroys the square
+            else if (this.gameObject.CompareTag("Block"))
+            {
+                spriteRenderer.sprite = brokenSprite;
+                transform.Translate(0, 0, 5);
+                this.gameObject.GetComponent<Collider2D>().enabled = false;
             }
         }
     }
+
     //Changing fresh water to muddy water
-    void OnTriggerEnter2D(Collider2D other){
-        if (this.gameObject.CompareTag("MudActive")){
-            if (other.gameObject.CompareTag("Water")){
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (this.gameObject.CompareTag("MudActive"))
+        {
+            if (other.gameObject.CompareTag("Water"))
+            {
                 other.gameObject.tag = "MuddyWater";
                 other.gameObject.layer = 9;
             }

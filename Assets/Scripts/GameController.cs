@@ -7,16 +7,24 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     private GameObject[] blocks;
+
     private GameObject[] muds;
-    public GameObject blockPrefab;
+
     private GameObject clickIndicator;
+
     public GameObject clickIndicatorPrefab;
+
     public Sprite canDigSprite;
+
     public Sprite cantDigSprite;
+
     private Scene scene;
+
+    private UIController uiController;
 
     // integer to keep track of water needed to collect
     public int waterNeeded = 50;
+
     public int waterCollected = 0;
 
     // get slider for water needed
@@ -24,10 +32,140 @@ public class GameController : MonoBehaviour
 
     // integer to keep track of lives
     public int maxiumumLives = 10;
-    public int hitsTaken = 0;
+
+    public int lives;
+
+    private float levelStartTime;
 
     // get slider for maximum lives
     private Slider maximumLivesSlider;
+
+    public enum GameState
+    {
+        paused,
+        playing,
+        won,
+        lost
+    }
+
+    public GameState gameState = GameState.paused;
+
+    void Awake()
+    {
+        // instantiate the click indicator
+        clickIndicator =
+            Instantiate(clickIndicatorPrefab,
+            Vector3.zero,
+            Quaternion.identity);
+
+        // get every block in the scene
+        blocks = GameObject.FindGameObjectsWithTag("Block");
+
+        // get the water slider in the ui canvas
+        waterNeededSlider =
+            GameObject
+                .FindGameObjectWithTag("WaterSlider")
+                .GetComponent<Slider>();
+
+        // get the lives slider in the ui canvas
+        maximumLivesSlider =
+            GameObject
+                .FindGameObjectWithTag("LivesSlider")
+                .GetComponent<Slider>();
+
+        // get ui controller
+        uiController = GameObject.Find("Canvas").GetComponent<UIController>();
+
+        lives = maxiumumLives;
+        levelStartTime = Time.time;
+
+        // set state to playing
+        setGameState(GameState.playing);
+    }
+
+    public void levelWon()
+    {
+        setGameState(GameState.won);
+    }
+
+    public void levelFailed()
+    {
+        setGameState(GameState.lost);
+    }
+
+    public void togglePause()
+    {
+        if (gameState == GameState.playing)
+        {
+            setGameState(GameState.paused);
+        }
+        else if (gameState == GameState.paused)
+        {
+            setGameState(GameState.playing);
+        }
+    }
+
+    public bool isPaused()
+    {
+        if (gameState == GameState.playing)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    public void restartLevel()
+    {
+        // reload the current level
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        levelStartTime = Time.time;
+    }
+
+    public void nextLevel()
+    {
+
+        int levelNumber = SceneManager.GetActiveScene().buildIndex + 1;
+
+        if (levelNumber == 10) {
+            // game is finished! gg
+            SceneManager.LoadScene("Menu");
+        } else {
+            // load the next level
+            SceneManager.LoadScene("Level " + levelNumber);
+        }
+    }
+
+    public void quitToMenu()
+    {
+        // load the menu
+        SceneManager.LoadScene("Menu");
+    }
+
+    void setGameState(GameState state)
+    {
+        switch (state)
+        {
+            case GameState.paused:
+                gameState = GameState.paused;
+                Time.timeScale = 0;
+                break;
+            case GameState.playing:
+                gameState = GameState.playing;
+                Time.timeScale = 1;
+                break;
+            case GameState.won:
+                gameState = GameState.won;
+                Time.timeScale = 0;
+                break;
+            case GameState.lost:
+                gameState = GameState.lost;
+                Time.timeScale = 0;
+                break;
+        }
+    }
 
     // method for converting mouse position to grid position
     Vector3 posToGrid(Vector3 Position)
@@ -39,6 +177,12 @@ public class GameController : MonoBehaviour
 
     void PositionClickIndicator()
     {
+
+        if (isPaused())
+        {
+            return;
+        }
+
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         // check if the mouse is over a block
@@ -51,11 +195,8 @@ public class GameController : MonoBehaviour
         // check hit for a block
         if (hit.collider != null)
         {
-            // get every mud in the scene
-            muds = GameObject.FindGameObjectsWithTag("Mud");
-
-            // check if the block is in the set of blocks
-            if ((System.Array.IndexOf(blocks, hit.collider.gameObject) != -1) || (System.Array.IndexOf(muds, hit.collider.gameObject) != -1))
+            // check if the mouse is over a mud or block
+            if (hit.collider.tag == "Mud" || hit.collider.tag == "Block")
             {
                 // set the sprite to can dig
                 clickIndicator.GetComponent<SpriteRenderer>().sprite =
@@ -76,89 +217,72 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void collectWater()
+    public void collectWater(string isMuddy)
     {
-        waterCollected += 1;
-
-        // update the slider value using the water collected and the water needed value
-        waterNeededSlider.value = (waterNeeded - waterCollected * 1f) / waterNeeded * 1f;
-        if (waterCollected >= waterNeeded)
+        if (isMuddy == "Clean")
         {
-            scene = SceneManager.GetActiveScene();
-            if(scene.name == "Level 1"){
-                SceneManager.LoadScene("Level 2");
-            }
-            else if (scene.name == "Level 2"){
-                SceneManager.LoadScene("Level 3");
-            }
-            else if (scene.name == "Level 3")
-            {
-                SceneManager.LoadScene("Level 4");
-            }
-            else if (scene.name == "Level 4")
-            {
-                SceneManager.LoadScene("Level 5");
-            }
-            else if (scene.name == "Level 5")
-            {
-                SceneManager.LoadScene("Level 6");
-            }
-            else if (scene.name == "Level 6")
-            {
-                SceneManager.LoadScene("Level 7");
-            }
-            else if (scene.name == "Level 7")
-            {
-                SceneManager.LoadScene("Level 8");
-            }
-            else if (scene.name == "Level 8")
-            {
-                SceneManager.LoadScene("Level 9");
-            }
-            else if (scene.name == "Level 9")
-            {
-                SceneManager.LoadScene("Level 10");
-            }
+            waterCollected += 1;
+            waterNeededSlider.value =
+                (waterNeeded - waterCollected * 1f) / waterNeeded;
         }
-    }
-
-    public void minusLives()
-    {
-        hitsTaken += 1;
+        else
+        {
+            lives -= 1;
+            maximumLivesSlider.value = (lives * 1f) / maxiumumLives;
+        }
 
         // update the slider value using the water collected and the water needed value
-        maximumLivesSlider.value = (maxiumumLives - hitsTaken * 1f) / maxiumumLives * 1f;
-
-        if (hitsTaken > maxiumumLives){
-            scene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(scene.name);
+        if (waterCollected >= waterNeeded && lives > 0)
+        {
+            uiController.levelWon(Time.time - levelStartTime, getParScore());
+        }
+        else if (lives <= 0)
+        {
+            uiController.levelFailed();
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    float getParScore()
     {
-        // instantiate the click indicator
-        clickIndicator =
-            Instantiate(clickIndicatorPrefab,
-            Vector3.zero,
-            Quaternion.identity);
+        // get level number
+        int levelNumber = SceneManager.GetActiveScene().buildIndex;
 
-        // get every block in the scene
-        blocks = GameObject.FindGameObjectsWithTag("Block");
+        // debug log level number
+        Debug.Log("Level Number: " + levelNumber);
 
-
-        // get the water slider in the ui canvas
-        waterNeededSlider = GameObject.FindGameObjectWithTag("WaterSlider").GetComponent<Slider>();
-
-        // get the lives slider in the ui canvas
-        maximumLivesSlider = GameObject.FindGameObjectWithTag("LivesSlider").GetComponent<Slider>();
+        switch (levelNumber)
+        {
+            case 1:
+                return 5f;
+            case 2:
+                return 5f;
+            case 3:
+                return 8f;
+            case 4:
+                return 10f;
+            case 5:
+                return 8f;
+            case 6:
+                return 10f;
+            case 7:
+                return 10f;
+            case 8:
+                return 6f;
+            case 9:
+                return 3f;
+            case 10:
+                return 15f;
+            default:
+                return -1f;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         PositionClickIndicator();
-    }
 
+        // update ui timer
+        uiController.setTimerValue(Time.time - levelStartTime);
+    }
 }
